@@ -6,17 +6,18 @@ const inquirer = require("inquirer");
 const mysql = require("mysql2");
 
 // Connect to database
-const connection = mysql.createConnection({
+const db = mysql.createConnection({
     host: "localhost",
     // MySQL username,
     user: "root",
     // MySQL password
     password: "sarapovaK1@",
-    database: "employee_db",
+    database: "employees_db",
   },
 
-  console.log("Start the employee or.")
+  console.log("Start the employee ")
 );
+
 
 function chooseDepartment() {
   inquirer.prompt([{
@@ -35,9 +36,9 @@ function chooseDepartment() {
       ],
     }, 
   ]).then(function ({
-      department
+      response
     }) {
-      switch (department) {
+      switch (response) {
         case "View Departments":
           viewDept();
           break;
@@ -83,14 +84,14 @@ function viewRoles() {
   });
 }
 
-function viewAllEmployee() {
+function viewEmployee() {
   db.query("SELECT * FROM employee", function (err, answers) {
     if (err) throw err;
     console.table(answers);
     chooseDepartment();
   });
 }
-const addDepartment = () => {
+const addDept = () => {
   inquirer
     .prompt([
       {
