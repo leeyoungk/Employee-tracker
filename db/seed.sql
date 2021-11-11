@@ -21,6 +21,6 @@ VALUES  (3,"John", "Doe",3, NULL ),
         (2,"Ashley", "Rodriguez",2,3),
         (4,"Kevin", "Tupik",4,NULL),
         (5,"Kunal", "Singh",5,7),
-        (6,"Malia", "Brown",6.7),
+        (6,"Malia", "Brown",6,7),
         (7,"Sarah", "Lourd",7,NULL),
         (8,"Tom", "Allen",8,4);
