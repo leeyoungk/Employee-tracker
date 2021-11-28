@@ -35,9 +35,7 @@ function chooseDepartment() {
         "Stop"
       ],
     }, 
-  ]).then(function ({
-      response
-    }) {
+  ]).then((response) => {
       switch (response) {
         case "View Departments":
           viewDept();
@@ -67,27 +65,27 @@ function chooseDepartment() {
     });
 }
 
-function viewDept() {
-  db.query("SELECT * FROM department", function (err, answers) {
+const viewDept = () => {
+  db.query("SELECT * FROM department", function (err, response) {
     if (err) throw err;
-    console.table(answers);
+    console.table(response);
     chooseDepartment();
   });
 
 }
 
 function viewRoles() {
-  db.query("SELECT * FROM roles", function (err, answers) {
+  db.query("SELECT * FROM roles", function (err, response) {
     if (err) throw err;
-    console.table(answers);
+    console.table(response);
     chooseDepartment();
   });
 }
 
 function viewEmployee() {
-  db.query("SELECT * FROM employee", function (err, answers) {
+  db.query("SELECT * FROM employee", function (err, response) {
     if (err) throw err;
-    console.table(answers);
+    console.table(response);
     chooseDepartment();
   });
 }
@@ -100,11 +98,11 @@ const addDept = () => {
         name: "department_name",
       },
     ])
-    .then(function (answers) {
+    .then(function (response) {
       db.query("INSERT INTO department SET ?", {
-        department_name: answers.department_name,
+        department_name: response.department_name,
       });
-      console.table(answers);
+      console.table(response);
       chooseDepartment();
     });
 };
@@ -135,21 +133,21 @@ function addRole() {
       name: "department_id"
     }
   ])
-  .then(function (answers) {
+  .then(function (response) {
     db.query("INSERT INTO roles SET ?", {
-      title: answers.title,
-      salary: answers.salary,
-      department_id: answers.department_id,
+      title: response.title,
+      salary: response.salary,
+      department_id: response.department_id,
     });
-    console.table(answers);
+    console.table(response);
     chooseDepartment();
   });
 }
 
 const addEmployee = () => {
-  db.query("SELECT * FROM employee WHERE roles_id =2", function (err, answers) {
+  db.query("SELECT * FROM employee WHERE roles_id =2", function (err, response) {
     if (err) throw err;
-    const managers = [...answers].map((object) => {
+    const managers = [...response].map((object) => {
       const obj = {
         name: object.first_name,
         value: object.id,
@@ -190,14 +188,14 @@ const addEmployee = () => {
         
   ],},
   ])
-  .then(function (answers) {
+  .then(function (response) {
     db.query("INSERT INTO employee SET ?", {
-      roles_id: answers.role,
-      first_name: answers.firstName,
-      last_name: answers.lastName,
-      manager_id: answers.manager,
+      roles_id: response.role,
+      first_name: response.firstName,
+      last_name: response.lastName,
+      manager_id: response.manager,
     });
-    console.table(answers);
+    console.table(response);
     chooseDepartment();
   });
 })
@@ -205,9 +203,9 @@ const addEmployee = () => {
   
 
   function updateRole () {
-    db.query("UPDATE employee SET roles WHERE title ?", function (err, answers) {
-      console.log(answers);
-      const employees = [...answers].map((object) => {
+    db.query("UPDATE employee SET roles WHERE title ?", function (err, response) {
+      console.log(response);
+      const employees = [...response].map((object) => {
         const obj = {
           name: object.title,
           value: object.id
@@ -234,13 +232,13 @@ const addEmployee = () => {
           choices: ["Sales", "Finance", "Engineering", "Legal"],
         },
       ])
-      .then(function (answers) {
+      .then(function (response) {
         db.query("UPDATE employee SET roles_id=? WHERE employee(id)=?", {
-          title: answers.title,
-          role: answers.roles_id,
-          salary: answers.salary
+          title: response.title,
+          role: response.roles_id,
+          salary: response.salary
         });
-        console.table(answers);
+        console.table(response);
         inquirer.prompt(chooseDepartment);
       });
     })
