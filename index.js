@@ -75,7 +75,7 @@ const viewDept = () => {
 }
 
 function viewRoles() {
-  db.query("SELECT * FROM roles", function (err, response) {
+  db.query("SELECT * FROM role", function (err, response) {
     if (err) throw err;
     console.table(response);
     chooseDepartment();
@@ -145,7 +145,7 @@ function addRole() {
 }
 
 const addEmployee = () => {
-  db.query("SELECT * FROM employee WHERE roles_id =2", function (err, response) {
+  db.query("SELECT * FROM employee WHERE role_id =2", function (err, response) {
     if (err) throw err;
     const managers = [...response].map((object) => {
       const obj = {
@@ -190,7 +190,7 @@ const addEmployee = () => {
   ])
   .then(function (response) {
     db.query("INSERT INTO employee SET ?", {
-      roles_id: response.role,
+      role_id: response.role,
       first_name: response.firstName,
       last_name: response.lastName,
       manager_id: response.manager,
@@ -233,9 +233,9 @@ const addEmployee = () => {
         },
       ])
       .then(function (response) {
-        db.query("UPDATE employee SET roles_id=? WHERE employee(id)=?", {
+        db.query("UPDATE employee SET role_id=? WHERE employee(id)=?", {
           title: response.title,
-          role: response.roles_id,
+          role: response.role_id,
           salary: response.salary
         });
         console.table(response);
