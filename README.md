@@ -26,6 +26,7 @@ this project was assigned to build an command-lind application  to manage a comp
 -   Created a function to switch cases
 
 ## Usage
+
 ![Desktop screensh (1)](https://user-images.githubusercontent.com/82126894/140874208-d6ee65fa-1cf2-4d1d-8b67-9d7d5d9983c2.png)
 
 
