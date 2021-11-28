@@ -36,7 +36,7 @@ function chooseDepartment() {
       ],
     }, 
   ]).then((response) => {
-      switch (response) {
+      switch (response.option) {
         case "View Departments":
           viewDept();
           break;
